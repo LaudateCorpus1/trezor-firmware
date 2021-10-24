@@ -1,6 +1,7 @@
-mod base;
+pub mod base;
 pub mod empty;
 pub mod label;
+pub mod map;
 pub mod text;
 
 pub use base::{Child, Component, Event, EventCtx, Never, TimerToken};
