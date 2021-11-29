@@ -22,9 +22,9 @@ from trezorlib import btc, device, messages
 from trezorlib.exceptions import TrezorFailure
 from trezorlib.tools import H_, parse_path, tx_hash
 
-from ..common import MNEMONIC12
-from ..tx_cache import TxCache
-from .signtx import request_finished, request_input, request_meta, request_output
+from ...common import MNEMONIC12
+from ...tx_cache import TxCache
+from ..signtx import request_finished, request_input, request_meta, request_output
 
 B = messages.ButtonRequestType
 

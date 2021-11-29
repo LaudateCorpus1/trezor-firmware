@@ -20,8 +20,8 @@ from trezorlib import btc, messages
 from trezorlib.exceptions import TrezorFailure
 from trezorlib.tools import H_, parse_path
 
-from ..tx_cache import TxCache
-from .signtx import request_finished, request_input, request_meta, request_output
+from ...tx_cache import TxCache
+from ..signtx import request_finished, request_input, request_meta, request_output
 
 B = messages.ButtonRequestType
 TX_API = TxCache("Testnet")

@@ -20,8 +20,8 @@ from trezorlib import btc, messages
 from trezorlib.exceptions import TrezorFailure
 from trezorlib.tools import parse_path
 
-from ..tx_cache import TxCache
-from .signtx import (
+from ...tx_cache import TxCache
+from ..signtx import (
     request_extra_data,
     request_finished,
     request_input,
