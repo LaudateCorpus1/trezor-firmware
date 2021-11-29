@@ -43,136 +43,135 @@ TXHASH_b0946d = bytes.fromhex(
 pytestmark = [pytest.mark.multisig, pytest.mark.setup_client(mnemonic=MNEMONIC12)]
 
 
-class Helpers:
-    node_ext1 = bip32.deserialize(
-        "xpub69qexv5TppjJQtXwSGeGXNtgGWyUzvsHACMt4Rr61Be4CmCf55eFcuXX828aySNuNR7hQYUCvUgZpioNxfs2HTAZWUUSFywhErg7JfTPv3Y"
-    )
-    # m/1 => 02c0d0c5fee952620757c6128dbf327c996cd72ed3358d15d6518a1186099bc15e
-    # m/2 => 0375b9dfaad928ce1a7eed88df7c084e67d99e9ab74332419458a9a45779706801
+NODE_EXT1 = bip32.deserialize(
+    "xpub69qexv5TppjJQtXwSGeGXNtgGWyUzvsHACMt4Rr61Be4CmCf55eFcuXX828aySNuNR7hQYUCvUgZpioNxfs2HTAZWUUSFywhErg7JfTPv3Y"
+)
+# m/1 => 02c0d0c5fee952620757c6128dbf327c996cd72ed3358d15d6518a1186099bc15e
+# m/2 => 0375b9dfaad928ce1a7eed88df7c084e67d99e9ab74332419458a9a45779706801
 
-    node_ext2 = bip32.deserialize(
-        "xpub69qexv5TppjJRiLLK2K1FZNCFcErkXprCo3jabCXMiqX5CFF4LHedwcXvXkTuBL9tFLWVxuGWrdeerXjiWpC1gynTNUaySDsr8SU5xMpj5R"
-    )
-    # m/1 => 0388460dc439f4c8f5bcfc268c36e11b4375cad5c3535c336cfdf8c32c3afad5c1
-    # m/2 => 03a04f945d5a3685729dde697d574076de4bdf38e904f813b22a851548e1110fc0
+NODE_EXT2 = bip32.deserialize(
+    "xpub69qexv5TppjJRiLLK2K1FZNCFcErkXprCo3jabCXMiqX5CFF4LHedwcXvXkTuBL9tFLWVxuGWrdeerXjiWpC1gynTNUaySDsr8SU5xMpj5R"
+)
+# m/1 => 0388460dc439f4c8f5bcfc268c36e11b4375cad5c3535c336cfdf8c32c3afad5c1
+# m/2 => 03a04f945d5a3685729dde697d574076de4bdf38e904f813b22a851548e1110fc0
 
-    node_ext3 = bip32.deserialize(
-        "xpub69qexv5TppjJVYtxFKSBFxcVGyaC8VJDa1RugAYwEDLVUBuaXrVgznvQB44piM8MRerfVf1pNCBK1L1NzhyKd4Ay25BVZX3S8twWfZDxmz7"
-    )
-    # m/1 => 02e0c21e2a7cf00b94c5421725acff97f9826598b91f2340c5ddda730caca7d648
-    # m/2 => 03928301ffb8c0d7a364b794914c716ba3107cc78a6fe581028b0d8638b22e8573
+NODE_EXT3 = bip32.deserialize(
+    "xpub69qexv5TppjJVYtxFKSBFxcVGyaC8VJDa1RugAYwEDLVUBuaXrVgznvQB44piM8MRerfVf1pNCBK1L1NzhyKd4Ay25BVZX3S8twWfZDxmz7"
+)
+# m/1 => 02e0c21e2a7cf00b94c5421725acff97f9826598b91f2340c5ddda730caca7d648
+# m/2 => 03928301ffb8c0d7a364b794914c716ba3107cc78a6fe581028b0d8638b22e8573
 
-    node_int = bip32.deserialize(
-        "xpub69qexv5TppjJNEK5bfX8vQ6ASXDUQ5PohSajrHgeknHZ4SJipn7edmpRmiiBLLDtPur71mekZFazhgas8rkUMnS7quk5qp64TLLV8ShrxZJ"
-    )
-    # m/1 => 03f91460d79e4e463d7d90cb75254bcd62b515a99a950574c721efdc5f711dff35
-    # m/2 => 038caebd6f753bbbd2bb1f3346a43cd32140648583673a31d62f2dfb56ad0ab9e3
+NODE_INT = bip32.deserialize(
+    "xpub69qexv5TppjJNEK5bfX8vQ6ASXDUQ5PohSajrHgeknHZ4SJipn7edmpRmiiBLLDtPur71mekZFazhgas8rkUMnS7quk5qp64TLLV8ShrxZJ"
+)
+# m/1 => 03f91460d79e4e463d7d90cb75254bcd62b515a99a950574c721efdc5f711dff35
+# m/2 => 038caebd6f753bbbd2bb1f3346a43cd32140648583673a31d62f2dfb56ad0ab9e3
 
-    # ext1 + ext2 + int
-    #   redeemscript (2 of 3): 522102c0d0c5fee952620757c6128dbf327c996cd72ed3358d15d6518a1186099bc15e210388460dc439f4c8f5bcfc268c36e11b4375cad5c3535c336cfdf8c32c3afad5c1210338d78612e990f2eea0c426b5e48a8db70b9d7ed66282b3b26511e0b1c75515a653ae
-    #   multisig address: 2N9W4z9AhAPaHghtqVQPbaTAGHdbrhKeBQw
-    #   tx: 16c6c8471b8db7a628f2b2bb86bfeefae1766463ce8692438c7fd3fce3f43ce5
-    #   input 0: 0.5 BTC
+# ext1 + ext2 + int
+#   redeemscript (2 of 3): 522102c0d0c5fee952620757c6128dbf327c996cd72ed3358d15d6518a1186099bc15e210388460dc439f4c8f5bcfc268c36e11b4375cad5c3535c336cfdf8c32c3afad5c1210338d78612e990f2eea0c426b5e48a8db70b9d7ed66282b3b26511e0b1c75515a653ae
+#   multisig address: 2N9W4z9AhAPaHghtqVQPbaTAGHdbrhKeBQw
+#   tx: 16c6c8471b8db7a628f2b2bb86bfeefae1766463ce8692438c7fd3fce3f43ce5
+#   input 0: 0.5 BTC
 
-    # ext1 + int + ext2
-    #   redeemscript (2 of 3): 522102c0d0c5fee952620757c6128dbf327c996cd72ed3358d15d6518a1186099bc15e210338d78612e990f2eea0c426b5e48a8db70b9d7ed66282b3b26511e0b1c75515a6210388460dc439f4c8f5bcfc268c36e11b4375cad5c3535c336cfdf8c32c3afad5c153ae
-    #   multisig address: 2NDBG6QXQLtnQ3jRGkrqo53BiCeXfQXLdj4
-    #   tx: d80c34ee14143a8bf61125102b7ef594118a3796cad670fa8ee15080ae155318
-    #   input 0: 0.345 BTC
+# ext1 + int + ext2
+#   redeemscript (2 of 3): 522102c0d0c5fee952620757c6128dbf327c996cd72ed3358d15d6518a1186099bc15e210338d78612e990f2eea0c426b5e48a8db70b9d7ed66282b3b26511e0b1c75515a6210388460dc439f4c8f5bcfc268c36e11b4375cad5c3535c336cfdf8c32c3afad5c153ae
+#   multisig address: 2NDBG6QXQLtnQ3jRGkrqo53BiCeXfQXLdj4
+#   tx: d80c34ee14143a8bf61125102b7ef594118a3796cad670fa8ee15080ae155318
+#   input 0: 0.345 BTC
 
-    # ext1 + ext3 + int
-    #   redeemscript (2 of 3): 522102c0d0c5fee952620757c6128dbf327c996cd72ed3358d15d6518a1186099bc15e2102e0c21e2a7cf00b94c5421725acff97f9826598b91f2340c5ddda730caca7d648210338d78612e990f2eea0c426b5e48a8db70b9d7ed66282b3b26511e0b1c75515a653ae
-    #   multisig address: 2MvwPWfp2XPU3S1cMwgEMKBPUw38VP5SBE4
-    #   tx: b0946dc27ba308a749b11afecc2018980af18f79e89ad6b080b58220d856f739
-    #   input 1: 0.555 BTC
+# ext1 + ext3 + int
+#   redeemscript (2 of 3): 522102c0d0c5fee952620757c6128dbf327c996cd72ed3358d15d6518a1186099bc15e2102e0c21e2a7cf00b94c5421725acff97f9826598b91f2340c5ddda730caca7d648210338d78612e990f2eea0c426b5e48a8db70b9d7ed66282b3b26511e0b1c75515a653ae
+#   multisig address: 2MvwPWfp2XPU3S1cMwgEMKBPUw38VP5SBE4
+#   tx: b0946dc27ba308a749b11afecc2018980af18f79e89ad6b080b58220d856f739
+#   input 1: 0.555 BTC
 
-    multisig_in1 = messages.MultisigRedeemScriptType(
-        nodes=[node_ext2, node_ext1, node_int],
-        address_n=[0, 0],
-        signatures=[b"", b"", b""],
-        m=2,
-    )
+multisig_in1 = messages.MultisigRedeemScriptType(
+    nodes=[NODE_EXT2, NODE_EXT1, NODE_INT],
+    address_n=[0, 0],
+    signatures=[b"", b"", b""],
+    m=2,
+)
 
-    multisig_in2 = messages.MultisigRedeemScriptType(
-        nodes=[node_ext1, node_ext2, node_int],
-        address_n=[0, 1],
-        signatures=[b"", b"", b""],
-        m=2,
-    )
+multisig_in2 = messages.MultisigRedeemScriptType(
+    nodes=[NODE_EXT1, NODE_EXT2, NODE_INT],
+    address_n=[0, 1],
+    signatures=[b"", b"", b""],
+    m=2,
+)
 
-    multisig_in3 = messages.MultisigRedeemScriptType(
-        nodes=[node_ext1, node_ext3, node_int],
-        address_n=[0, 1],
-        signatures=[b"", b"", b""],
-        m=2,
-    )
+multisig_in3 = messages.MultisigRedeemScriptType(
+    nodes=[NODE_EXT1, NODE_EXT3, NODE_INT],
+    address_n=[0, 1],
+    signatures=[b"", b"", b""],
+    m=2,
+)
 
-    # 2N9W4z9AhAPaHghtqVQPbaTAGHdbrhKeBQw
-    inp1 = messages.TxInputType(
-        address_n=[H_(45), 0, 0, 0],
-        amount=50000000,
-        prev_hash=TXHASH_16c6c8,
-        prev_index=1,
-        script_type=messages.InputScriptType.SPENDMULTISIG,
-        multisig=multisig_in1,
-    )
+# 2N9W4z9AhAPaHghtqVQPbaTAGHdbrhKeBQw
+INP1 = messages.TxInputType(
+    address_n=[H_(45), 0, 0, 0],
+    amount=50000000,
+    prev_hash=TXHASH_16c6c8,
+    prev_index=1,
+    script_type=messages.InputScriptType.SPENDMULTISIG,
+    multisig=multisig_in1,
+)
 
-    # 2NDBG6QXQLtnQ3jRGkrqo53BiCeXfQXLdj4
-    inp2 = messages.TxInputType(
-        address_n=[H_(45), 0, 0, 1],
-        amount=34500000,
-        prev_hash=TXHASH_d80c34,
-        prev_index=0,
-        script_type=messages.InputScriptType.SPENDMULTISIG,
-        multisig=multisig_in2,
-    )
+# 2NDBG6QXQLtnQ3jRGkrqo53BiCeXfQXLdj4
+INP2 = messages.TxInputType(
+    address_n=[H_(45), 0, 0, 1],
+    amount=34500000,
+    prev_hash=TXHASH_d80c34,
+    prev_index=0,
+    script_type=messages.InputScriptType.SPENDMULTISIG,
+    multisig=multisig_in2,
+)
 
-    # 2MvwPWfp2XPU3S1cMwgEMKBPUw38VP5SBE4
-    inp3 = messages.TxInputType(
-        address_n=[H_(45), 0, 0, 1],
-        amount=55500000,
-        prev_hash=TXHASH_b0946d,
-        prev_index=0,
-        script_type=messages.InputScriptType.SPENDMULTISIG,
-        multisig=multisig_in3,
-    )
+# 2MvwPWfp2XPU3S1cMwgEMKBPUw38VP5SBE4
+INP3 = messages.TxInputType(
+    address_n=[H_(45), 0, 0, 1],
+    amount=55500000,
+    prev_hash=TXHASH_b0946d,
+    prev_index=0,
+    script_type=messages.InputScriptType.SPENDMULTISIG,
+    multisig=multisig_in3,
+)
 
-    def _responses(inp1, inp2, change=0):
-        resp = [
-            request_input(0),
-            request_input(1),
-            request_output(0),
-        ]
-        if change != 1:
-            resp.append(messages.ButtonRequest(code=B.ConfirmOutput))
-        resp.append(request_output(1))
-        if change != 2:
-            resp.append(messages.ButtonRequest(code=B.ConfirmOutput))
-        resp += [
-            messages.ButtonRequest(code=B.SignTx),
-            request_input(0),
-            request_meta(inp1.prev_hash),
-            request_input(0, inp1.prev_hash),
-            request_output(0, inp1.prev_hash),
-            request_output(1, inp1.prev_hash),
-            request_input(1),
-            request_meta(inp2.prev_hash),
-            request_input(0, inp2.prev_hash),
-            request_output(0, inp2.prev_hash),
-            request_output(1, inp2.prev_hash),
-            request_input(0),
-            request_input(1),
-            request_output(0),
-            request_output(1),
-            request_input(0),
-            request_input(1),
-            request_output(0),
-            request_output(1),
-            request_output(0),
-            request_output(1),
-            request_finished(),
-        ]
-        return resp
+def _responses(INP1, INP2, change=0):
+    resp = [
+        request_input(0),
+        request_input(1),
+        request_output(0),
+    ]
+    if change != 1:
+        resp.append(messages.ButtonRequest(code=B.ConfirmOutput))
+    resp.append(request_output(1))
+    if change != 2:
+        resp.append(messages.ButtonRequest(code=B.ConfirmOutput))
+    resp += [
+        messages.ButtonRequest(code=B.SignTx),
+        request_input(0),
+        request_meta(INP1.prev_hash),
+        request_input(0, INP1.prev_hash),
+        request_output(0, INP1.prev_hash),
+        request_output(1, INP1.prev_hash),
+        request_input(1),
+        request_meta(INP2.prev_hash),
+        request_input(0, INP2.prev_hash),
+        request_output(0, INP2.prev_hash),
+        request_output(1, INP2.prev_hash),
+        request_input(0),
+        request_input(1),
+        request_output(0),
+        request_output(1),
+        request_input(0),
+        request_input(1),
+        request_output(0),
+        request_output(1),
+        request_output(0),
+        request_output(1),
+        request_finished(),
+    ]
+    return resp
 
 
 # both outputs are external
@@ -190,11 +189,11 @@ def test_external_external(client):
     )
 
     with client:
-        client.set_expected_responses(Helpers._responses(Helpers.inp1, Helpers.inp2))
+        client.set_expected_responses(_responses(INP1, INP2))
         _, serialized_tx = btc.sign_tx(
             client,
             "Bitcoin",
-            [Helpers.inp1, Helpers.inp2],
+            [INP1, INP2],
             [out1, out2],
             prev_txes=TX_API,
         )
@@ -221,12 +220,12 @@ def test_external_internal(client):
 
     with client:
         client.set_expected_responses(
-            Helpers._responses(Helpers.inp1, Helpers.inp2, change=2)
+            _responses(INP1, INP2, change=2)
         )
         _, serialized_tx = btc.sign_tx(
             client,
             "Bitcoin",
-            [Helpers.inp1, Helpers.inp2],
+            [INP1, INP2],
             [out1, out2],
             prev_txes=TX_API,
         )
@@ -253,12 +252,12 @@ def test_internal_external(client):
 
     with client:
         client.set_expected_responses(
-            Helpers._responses(Helpers.inp1, Helpers.inp2, change=1)
+            _responses(INP1, INP2, change=1)
         )
         _, serialized_tx = btc.sign_tx(
             client,
             "Bitcoin",
-            [Helpers.inp1, Helpers.inp2],
+            [INP1, INP2],
             [out1, out2],
             prev_txes=TX_API,
         )
@@ -284,11 +283,11 @@ def test_multisig_external_external(client):
     )
 
     with client:
-        client.set_expected_responses(Helpers._responses(Helpers.inp1, Helpers.inp2))
+        client.set_expected_responses(_responses(INP1, INP2))
         _, serialized_tx = btc.sign_tx(
             client,
             "Bitcoin",
-            [Helpers.inp1, Helpers.inp2],
+            [INP1, INP2],
             [out1, out2],
             prev_txes=TX_API,
         )
@@ -302,7 +301,7 @@ def test_multisig_external_external(client):
 # inputs match, change matches (first is change)
 def test_multisig_change_match_first(client):
     multisig_out1 = messages.MultisigRedeemScriptType(
-        nodes=[Helpers.node_ext2, Helpers.node_ext1, Helpers.node_int],
+        nodes=[NODE_EXT2, NODE_EXT1, NODE_INT],
         address_n=[1, 0],
         signatures=[b"", b"", b""],
         m=2,
@@ -323,12 +322,12 @@ def test_multisig_change_match_first(client):
 
     with client:
         client.set_expected_responses(
-            Helpers._responses(Helpers.inp1, Helpers.inp2, change=1)
+            _responses(INP1, INP2, change=1)
         )
         _, serialized_tx = btc.sign_tx(
             client,
             "Bitcoin",
-            [Helpers.inp1, Helpers.inp2],
+            [INP1, INP2],
             [out1, out2],
             prev_txes=TX_API,
         )
@@ -342,7 +341,7 @@ def test_multisig_change_match_first(client):
 # inputs match, change matches (second is change)
 def test_multisig_change_match_second(client):
     multisig_out2 = messages.MultisigRedeemScriptType(
-        nodes=[Helpers.node_ext1, Helpers.node_ext2, Helpers.node_int],
+        nodes=[NODE_EXT1, NODE_EXT2, NODE_INT],
         address_n=[1, 1],
         signatures=[b"", b"", b""],
         m=2,
@@ -363,12 +362,12 @@ def test_multisig_change_match_second(client):
 
     with client:
         client.set_expected_responses(
-            Helpers._responses(Helpers.inp1, Helpers.inp2, change=2)
+            _responses(INP1, INP2, change=2)
         )
         _, serialized_tx = btc.sign_tx(
             client,
             "Bitcoin",
-            [Helpers.inp1, Helpers.inp2],
+            [INP1, INP2],
             [out1, out2],
             prev_txes=TX_API,
         )
@@ -382,7 +381,7 @@ def test_multisig_change_match_second(client):
 # inputs match, change mismatches (second tries to be change but isn't)
 def test_multisig_mismatch_change(client):
     multisig_out2 = messages.MultisigRedeemScriptType(
-        nodes=[Helpers.node_ext1, Helpers.node_int, Helpers.node_ext3],
+        nodes=[NODE_EXT1, NODE_INT, NODE_EXT3],
         address_n=[1, 0],
         signatures=[b"", b"", b""],
         m=2,
@@ -402,11 +401,11 @@ def test_multisig_mismatch_change(client):
     )
 
     with client:
-        client.set_expected_responses(Helpers._responses(Helpers.inp1, Helpers.inp2))
+        client.set_expected_responses(_responses(INP1, INP2))
         _, serialized_tx = btc.sign_tx(
             client,
             "Bitcoin",
-            [Helpers.inp1, Helpers.inp2],
+            [INP1, INP2],
             [out1, out2],
             prev_txes=TX_API,
         )
@@ -420,7 +419,7 @@ def test_multisig_mismatch_change(client):
 # inputs mismatch, change matches with first input
 def test_multisig_mismatch_inputs(client):
     multisig_out1 = messages.MultisigRedeemScriptType(
-        nodes=[Helpers.node_ext2, Helpers.node_ext1, Helpers.node_int],
+        nodes=[NODE_EXT2, NODE_EXT1, NODE_INT],
         address_n=[1, 0],
         signatures=[b"", b"", b""],
         m=2,
@@ -440,11 +439,11 @@ def test_multisig_mismatch_inputs(client):
     )
 
     with client:
-        client.set_expected_responses(Helpers._responses(Helpers.inp1, Helpers.inp3))
+        client.set_expected_responses(_responses(INP1, INP3))
         _, serialized_tx = btc.sign_tx(
             client,
             "Bitcoin",
-            [Helpers.inp1, Helpers.inp3],
+            [INP1, INP3],
             [out1, out2],
             prev_txes=TX_API,
         )
