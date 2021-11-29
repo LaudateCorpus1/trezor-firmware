@@ -21,7 +21,7 @@ from trezorlib import device, messages
 
 from ...common import generate_entropy
 
-pytestmark = [pytest.mark.skip_t1]
+pytestmark = pytest.mark.skip_t2
 
 
 def reset_device(client, strength):

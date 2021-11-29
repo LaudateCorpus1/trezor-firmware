@@ -21,7 +21,7 @@ from trezorlib import messages
 
 from ...common import generate_entropy
 
-pytestmark = [pytest.mark.skip_t2]
+pytestmark = pytest.mark.skip_t2
 
 EXTERNAL_ENTROPY = b"zlutoucky kun upel divoke ody" * 2
 STRENGTH = 128
