@@ -34,6 +34,7 @@ TXHASH_d5f65e = bytes.fromhex(
 
 pytestmark = pytest.mark.altcoin
 
+
 # Adapted from TestMsgSigntx.test_one_one_fee,
 # only changed the coin from Bitcoin to Litecoin.
 # Litecoin does not have strong replay protection using SIGHASH_FORKID,

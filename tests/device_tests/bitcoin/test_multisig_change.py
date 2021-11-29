@@ -136,6 +136,7 @@ INP3 = messages.TxInputType(
     multisig=multisig_in3,
 )
 
+
 def _responses(INP1, INP2, change=0):
     resp = [
         request_input(0),
@@ -219,9 +220,7 @@ def test_external_internal(client):
     )
 
     with client:
-        client.set_expected_responses(
-            _responses(INP1, INP2, change=2)
-        )
+        client.set_expected_responses(_responses(INP1, INP2, change=2))
         _, serialized_tx = btc.sign_tx(
             client,
             "Bitcoin",
@@ -251,9 +250,7 @@ def test_internal_external(client):
     )
 
     with client:
-        client.set_expected_responses(
-            _responses(INP1, INP2, change=1)
-        )
+        client.set_expected_responses(_responses(INP1, INP2, change=1))
         _, serialized_tx = btc.sign_tx(
             client,
             "Bitcoin",
@@ -321,9 +318,7 @@ def test_multisig_change_match_first(client):
     )
 
     with client:
-        client.set_expected_responses(
-            _responses(INP1, INP2, change=1)
-        )
+        client.set_expected_responses(_responses(INP1, INP2, change=1))
         _, serialized_tx = btc.sign_tx(
             client,
             "Bitcoin",
@@ -361,9 +356,7 @@ def test_multisig_change_match_second(client):
     )
 
     with client:
-        client.set_expected_responses(
-            _responses(INP1, INP2, change=2)
-        )
+        client.set_expected_responses(_responses(INP1, INP2, change=2))
         _, serialized_tx = btc.sign_tx(
             client,
             "Bitcoin",
